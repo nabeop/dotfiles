@@ -177,6 +177,7 @@
 :UniteWithCurrentDir	unite.txt	/*:UniteWithCurrentDir*
 :UniteWithCursorWord	unite.txt	/*:UniteWithCursorWord*
 :UniteWithInput	unite.txt	/*:UniteWithInput*
+:UniteWithInputDirectory	unite.txt	/*:UniteWithInputDirectory*
 :UniteWithProjectDir	unite.txt	/*:UniteWithProjectDir*
 :VimFiler	vimfiler.txt	/*:VimFiler*
 :VimFilerBufferDir	vimfiler.txt	/*:VimFilerBufferDir*
@@ -737,6 +738,7 @@ g:neocomplete#sources#vim#complete_functions	neocomplete.txt	/*g:neocomplete#sou
 g:neocomplete#tags_filter_patterns	neocomplete.txt	/*g:neocomplete#tags_filter_patterns*
 g:neocomplete#text_mode_filetypes	neocomplete.txt	/*g:neocomplete#text_mode_filetypes*
 g:neocomplete#use_vimproc	neocomplete.txt	/*g:neocomplete#use_vimproc*
+g:neosnippet#data_directory	neosnippet.txt	/*g:neosnippet#data_directory*
 g:neosnippet#disable_runtime_snippets	neosnippet.txt	/*g:neosnippet#disable_runtime_snippets*
 g:neosnippet#disable_select_mode_mappings	neosnippet.txt	/*g:neosnippet#disable_select_mode_mappings*
 g:neosnippet#enable_preview	neosnippet.txt	/*g:neosnippet#enable_preview*
@@ -744,7 +746,6 @@ g:neosnippet#enable_snipmate_compatibility	neosnippet.txt	/*g:neosnippet#enable_
 g:neosnippet#expand_word_boundary	neosnippet.txt	/*g:neosnippet#expand_word_boundary*
 g:neosnippet#scope_aliases	neosnippet.txt	/*g:neosnippet#scope_aliases*
 g:neosnippet#snippets_directory	neosnippet.txt	/*g:neosnippet#snippets_directory*
-g:neosnippet_data_directory	neosnippet.txt	/*g:neosnippet_data_directory*
 g:quickrun#default_config	quickrun.txt	/*g:quickrun#default_config*
 g:quickrun_config	quickrun.txt	/*g:quickrun_config*
 g:quickrun_no_default_key_mappings	quickrun.txt	/*g:quickrun_no_default_key_mappings*
