@@ -3,7 +3,11 @@ augroup MyAutoCmd
   autocmd!
 augroup END
 
-
+"------------------------------------------------2014/05/23追記
+"------------------------------------------------undo機能のやつ
+"testing
+set undodir=~/vim/undo
+set imdisable
 "------------------------------------------------about searching
 set ignorecase          " 大文字小文字を区別しない
 set smartcase           " 検索文字に大文字がある場合は大文字小文字を区別
@@ -169,7 +173,6 @@ if has('vim_starting')
  NeoBundle 'flazz/vim-colorschemes'
  NeoBundle 'altercation/vim-colors-solarized'
  NeoBundle 'Shougo/unite.vim'
- 
 
 
 " 次に説明するがInsertモードに入るまではneocompleteはロードされない
@@ -340,6 +343,10 @@ nmap <Leader>r <Plug>(quickrun)
 let s:hooks = neobundle#get_hooks("vim-quickrun")
 function! s:hooks.on_source(bundle)
   let g:quickrun_config = {
+  \	'tex':{
+  \		'command': 'ptex2pdf',
+  \		'exec': ['%c -l -u -ot "-synctex=1 -interaction=nonstopmode" %s', 'open %s:r.pdf']
+  \	},
       \ "*": {"runner": "remote/vimproc"},
       \ }
 endfunction
@@ -369,4 +376,5 @@ nmap <Leader>t :TagbarToggle<CR>
  set background=dark
  let g:solarized_termcolors=256
  colorscheme solarized
+
 
