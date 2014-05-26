@@ -173,6 +173,7 @@ if has('vim_starting')
  NeoBundle 'flazz/vim-colorschemes'
  NeoBundle 'altercation/vim-colors-solarized'
  NeoBundle 'Shougo/unite.vim'
+ NeoBundle 'git://git.code.sf.net/p/vim-latex/vim-latex'
 
 
 " 次に説明するがInsertモードに入るまではneocompleteはロードされない
@@ -378,3 +379,12 @@ nmap <Leader>t :TagbarToggle<CR>
  colorscheme solarized
 
 
+"-----------------------------------vim-latex configuration
+filetype plugin on
+filetype indent on
+set shellslash
+set grepprg=grep\ -nH\ $*
+let g:tex_flavor='latex'
+let g:Imap_UsePlaceHolders = 1
+let g:Imap_DeleteEmptyPlaceHolders = 1
+let g:Imap_StickyPlaceHolders = 0
