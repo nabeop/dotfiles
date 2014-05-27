@@ -1,2 +1,6 @@
 [user]
 	name = nabeop
+[color]
+	ui = true
+[core]
+	editor = vim
