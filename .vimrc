@@ -345,8 +345,8 @@ let s:hooks = neobundle#get_hooks("vim-quickrun")
 function! s:hooks.on_source(bundle)
   let g:quickrun_config = {
   \	'tex':{
-  \		'command': 'ptex2pdf',
-  \		'exec': ['%c -l -u -ot "-synctex=1 -interaction=nonstopmode" %s', 'open %s:r.pdf']
+  \		'command': 'latexmk',
+  \		'exec': ['%c -gg -pdfdvi %s', 'open %s:r.pdf']
   \	},
       \ "*": {"runner": "remote/vimproc"},
       \ }
