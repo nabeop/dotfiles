@@ -150,6 +150,11 @@ if filereadable(s:local_vimrc)
     execute 'source ' . s:local_vimrc
 endif
 
+"----------------------------------------------2014/06/11追記 透過設定
+if has('gui_macvim')
+	set transparency=10
+	set guioptions-=T
+endif
 "------------------------------------------------NeoBundle configuration
 if has('vim_starting')
    set nocompatible               " Be iMproved
