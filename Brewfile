@@ -19,6 +19,7 @@ install gcc
 install freetype
 install python
 install python3
+install ghostscript
 
 #cask install
 install brew-cask
