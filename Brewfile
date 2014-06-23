@@ -6,7 +6,7 @@ upgrade
 
 #add repo
 tap homebrew/binary
-tap caskroom/homebrew-cask
+tap caskroom/cask
 tap nabeop/homebrew-nabeop
 
 #insatall package
@@ -20,6 +20,7 @@ install freetype
 install python
 install python3
 install ghostscript
+install coreutils
 
 #cask install
 install brew-cask
@@ -44,6 +45,6 @@ cask install keyremap4macbook
 cask install mactex
 cask install quicksilver
 
-
+linkapps
 cleanup
 cask cleanup
