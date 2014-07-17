@@ -362,57 +362,7 @@ function! s:hooks.on_source(bundle)
       \ "*": {"runner": "remote/vimproc"},
       \ }
   \ },
-\
-\ "cpp/watchdogs_checker" : {
-\ "type" : "watchdogs_checker/clang++",
-\ },
-\
-\ "watchdogs_checker/_" : {
-\ "outputter/quickfix/open_cmd" : "",
-\ },
-\
-\ "watchdogs_checker/g++" : {
-\ "cmdopt" : "-Wall",
-\ },
-\
-\ "watchdogs_checker/clang++" : {
-\ "cmdopt" : "-Wall",
-\ },
-\ }
-
-let s:hook = {
-\ "name" : "add_include_option",
-\ "kind" : "hook",
-\ "config" : {
-\ "option_format" : "-I%s"
-\ },
-\}
-
-function! s:hook.on_normalized(session, context)
-" filetype==cpp 以外は設定しない
-if &filetype !=# "cpp"
-return
-endif
-let paths = filter(split(&path, ","), "len(v:val) && v:val !='.' && v:val !~ $VIM_CPP_STDLIB")
-
-if len(paths)
-let a:session.config.cmdopt .= " " . join(map(paths, "printf(self.config.option_format, v:val)")) . " "
-endif
 endfunction
-
-call quickrun#module#register(s:hook, 1)
-unlet s:hook
-
-
-let s:hook = {
-\ "name" : "clear_quickfix",
-\ "kind" : "hook",
-\}
-
-function! s:hook.on_normalized(session, context)
-call setqflist([]) 
-endfunction
-
 NeoBundleLazy 'majutsushi/tagbar', {
       \ "autload": {
       \   "commands": ["TagbarToggle"],
