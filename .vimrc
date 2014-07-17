@@ -385,8 +385,6 @@ NeoBundleLazy 'osyo-manga/vim-marching',{
 NeoBundleLazy 'rhysd/wandbox-vim',{
 			\ "autoload": {"filetypes": ["cpp", "h", "hpp"]}}
 
-NeoBundleLazy 'osyo-manga/vim-watchdogs',{
-			\ "autoload": {"filetypes": ["cpp", "h", "hpp"]}}
 NeoBundleLazy 'osyo-manga/shabadou.vim',{
 			\ "autoload": {"filetypes": ["cpp", "h", "hpp"]}}
 
@@ -438,10 +436,6 @@ function! s:hooks.on_source(bundle)
 	xmap <Space>M <Plug>(quickhl-manual-reset)
 endfunction
 
-let s:hooks = neobundle#get_hooks("vim-watchdogs")
-function! s:hooks.on_source(bundle)
-	let g:watchdogs_check_BufWritePost_enable = 1
-endfunction
 
 " marching.vim
 let s:hooks = neobundle#get_hooks("vim-marching")
