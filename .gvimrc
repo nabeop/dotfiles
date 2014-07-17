@@ -152,9 +152,15 @@ endif
 
 "----------------------------------------------2014/06/11追記 透過設定
 if has('gui_macvim')
-	set transparency=10
+	set transparency=15
 	set guioptions-=T
 endif
+"-----------------------------------------------2014/07/17追記 C++関係
+" default : ""
+let $VIM_CPP_STDLIB = "/usr/include/c++/4.2.1"
+" default : ""
+let $VIM_CPP_INCLUDE_DIR = "/usr/local/include"  
+
 "------------------------------------------------NeoBundle configuration
 if has('vim_starting')
    set nocompatible               " Be iMproved
@@ -355,6 +361,56 @@ function! s:hooks.on_source(bundle)
   \	},
       \ "*": {"runner": "remote/vimproc"},
       \ }
+  \ },
+\
+\ "cpp/watchdogs_checker" : {
+\ "type" : "watchdogs_checker/clang++",
+\ },
+\
+\ "watchdogs_checker/_" : {
+\ "outputter/quickfix/open_cmd" : "",
+\ },
+\
+\ "watchdogs_checker/g++" : {
+\ "cmdopt" : "-Wall",
+\ },
+\
+\ "watchdogs_checker/clang++" : {
+\ "cmdopt" : "-Wall",
+\ },
+\ }
+
+let s:hook = {
+\ "name" : "add_include_option",
+\ "kind" : "hook",
+\ "config" : {
+\ "option_format" : "-I%s"
+\ },
+\}
+
+function! s:hook.on_normalized(session, context)
+" filetype==cpp 以外は設定しない
+if &filetype !=# "cpp"
+return
+endif
+let paths = filter(split(&path, ","), "len(v:val) && v:val !='.' && v:val !~ $VIM_CPP_STDLIB")
+
+if len(paths)
+let a:session.config.cmdopt .= " " . join(map(paths, "printf(self.config.option_format, v:val)")) . " "
+endif
+endfunction
+
+call quickrun#module#register(s:hook, 1)
+unlet s:hook
+
+
+let s:hook = {
+\ "name" : "clear_quickfix",
+\ "kind" : "hook",
+\}
+
+function! s:hook.on_normalized(session, context)
+call setqflist([]) 
 endfunction
 
 NeoBundleLazy 'majutsushi/tagbar', {
@@ -366,6 +422,29 @@ NeoBundleLazy 'majutsushi/tagbar', {
       \ }}
 nmap <Leader>t :TagbarToggle<CR>
 
+"-------------------------------------------2014-07-17 neobundle for cpp
+NeoBundleLazy 'vim-jp/cpp-vim',{
+	\ "autoload": {"filetypes": ["cpp","h","hpp"]}}
+
+NeoBundleLazy 'tyru/caw.vim',{
+			\ "autoload": {"filetypes": ["cpp","h","hpp"]}}
+
+NeoBundleLazy 'osyo-manga/vim-marching',{
+			\ "autoload": {"filetypes": ["cpp","h","hpp"]}}
+
+NeoBundleLazy 'rhysd/wandbox-vim',{
+			\ "autoload": {"filetypes": ["cpp", "h", "hpp"]}}
+
+NeoBundleLazy 'osyo-manga/vim-watchdogs',{
+			\ "autoload": {"filetypes": ["cpp", "h", "hpp"]}}
+NeoBundleLazy 'osyo-manga/shabadou.vim',{
+			\ "autoload": {"filetypes": ["cpp", "h", "hpp"]}}
+
+NeoBundle 'jceb/vim-hier'
+NeoBundle 'dannyob/quickfixstatus'
+
+NeoBundle 't9md/vim-quickhl'
+ 
  " You can specify revision/branch/tag.
  NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
 
@@ -383,7 +462,74 @@ nmap <Leader>t :TagbarToggle<CR>
  let g:solarized_termcolors=256
  colorscheme solarized
 
+"---------------------------2014/07/17 c++ plugin config
+"
+let s:hooks = neobundle#get_hooks("caw.vim")
+function! s:hooks.on_source(bundle)
+	"mapping for comment out using <leader>+c or C
+	nmap <leader>c <Plug>(caw:I:toggle)
+	vmap <leader>c <Plug>(caw:I:toggle)
 
+	nmap <leader>C <Plug>(caw:I:uncomment)
+	vmap <leader>C <Plug>(caw:I:uncomment)
+
+endfunction
+
+let s:hooks = neobundle#get_hooks("quickfixstatus")
+function! s:hooks.on_post_source(bundle)
+QuickfixStatusEnable
+endfunction
+
+let s:hooks = neobundle#get_hooks("vim-quickhl")
+function! s:hooks.on_source(bundle)
+	nmap <Space>m <Plug>(quickhl-manual-this)
+	xmap <Space>m <Plug>(quickhl-manual-this)
+	nmap <Space>M <Plug>(quickhl-manual-reset)
+	xmap <Space>M <Plug>(quickhl-manual-reset)
+endfunction
+
+let s:hooks = neobundle#get_hooks("vim-watchdogs")
+function! s:hooks.on_source(bundle)
+	let g:watchdogs_check_BufWritePost_enable = 1
+endfunction
+
+" marching.vim
+let s:hooks = neobundle#get_hooks("vim-marching")
+function! s:hooks.on_post_source(bundle)
+if !empty(g:marching_clang_command) && executable(g:marching_clang_command)
+" 非同期ではなくて同期処理で補完する
+let g:marching_backend = "sync_clang_command"
+else
+" clang コマンドが実行できなければ wandbox を使用する
+let g:marching_backend = "wandbox"
+let g:marching_clang_command = ""
+endif
+
+" オプションの設定
+" これは clang のコマンドに渡される
+let g:marching#clang_command#options = {
+\ "cpp" : "-std=gnu++1y"
+\}
+
+
+if !neobundle#is_sourced("neocomplete.vim")
+return
+endif
+
+" neocomplete.vim と併用して使用する場合
+" neocomplete.vim を使用すれば自動補完になる
+let g:marching_enable_neocomplete = 1
+
+if !exists('g:neocomplete#force_omni_input_patterns')
+let g:neocomplete#force_omni_input_patterns = {}
+endif
+
+let g:neocomplete#force_omni_input_patterns.cpp =
+\ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
+endfunction
+unlet s:hooks
+
+ 
 "-----------------------------------vim-latex configuration
 filetype plugin on
 filetype indent on

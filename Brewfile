@@ -17,7 +17,6 @@ install wget
 install lv
 install gcc
 install freetype
-install python
 install python3
 install ghostscript
 install coreutils
