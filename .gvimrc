@@ -152,7 +152,7 @@ endif
 
 "----------------------------------------------2014/06/11追記 透過設定
 if has('gui_macvim')
-	set transparency=15
+	set transparency=30
 	set guioptions-=T
 endif
 "-----------------------------------------------2014/07/17追記 C++関係
@@ -356,11 +356,10 @@ let s:hooks = neobundle#get_hooks("vim-quickrun")
 function! s:hooks.on_source(bundle)
   let g:quickrun_config = {
   \	'tex':{
-  \		'command': 'latexmk',
-  \		'exec': ['%c -gg -pdfdvi %s', 'open %s:r.pdf']
-  \	},
+  \	'command': 'ptex2pdf'
+  \	'exec': ['%c -l -u -ot "-synctex=1 -interaction=nonstopmode" %s'. 'open %s:r.pdf']
+  \}
       \ "*": {"runner": "remote/vimproc"},
-      \ }
   \ },
 endfunction
 NeoBundleLazy 'majutsushi/tagbar', {
