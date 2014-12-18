@@ -6,7 +6,7 @@ augroup END
 "------------------------------------------------2014/05/23追記
 "------------------------------------------------undo機能のやつ
 "testing
-set undodir=~/vim/undo
+set noundofile
 set imdisable
 "------------------------------------------------about searching
 set ignorecase          " 大文字小文字を区別しない
