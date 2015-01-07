@@ -8,3 +8,8 @@ zipで全部落としてきて、$HOME直下に展開
 あとは  
 ``$ chmod +x dotfileslink.sh``  
 で実行権限付けて実行すればおｋ
+shellをzshに変えてー
+brew インスコしたらhomebrew-fileだけインスコしてー
+brew file set_repo https://nabeop@git.codebreak.com/nabeop/Brewfile.git
+してあげて，
+brew file pull&installで環境できるよ．macvim-kaoriyaとかmutecon以外
