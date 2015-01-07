@@ -1,7 +1,7 @@
 # 少し凝った zshrc
 # License : MIT
 # http://mollifier.mit-license.org/
- 
+# 以上を元にNabeoが改変して使ってるzshrc 
 ########################################
 # 環境変数
 export LANG=ja_JP.UTF-8
@@ -152,7 +152,8 @@ elif which putclip >/dev/null 2>&1 ; then
     alias -g C='| putclip'
 fi
  
- 
+#2014/1/7 つけたし．latexmk関係
+alias lmk='latexmk'
  
 ########################################
 # OS 別の設定
