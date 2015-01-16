@@ -17,7 +17,6 @@ set hlsearch            " 検索マッチテキストをハイライト (2013-07
 " バックスラッシュやクエスチョンを状況に合わせ自動的にエスケープ
 cnoremap <expr> / getcmdtype() == '/' ? '\/' : '/'
 cnoremap <expr> ? getcmdtype() == '?' ? '\?' : '?'
-
 "------------------------------------------------editing configuration
 set shiftround          " '<'や'>'でインデントする際に'shiftwidth'の倍数に丸める
 set infercase           " 補完時に大文字小文字を区別しない
@@ -154,7 +153,7 @@ endif
 
 "----------------------------------------------2014/06/11追記 透過設定
 if has('gui_macvim')
-	set transparency=30
+	set transparency=45
 	set guioptions-=T
 endif
 "-----------------------------------------------2014/07/17追記 C++関係
@@ -187,6 +186,7 @@ if has('vim_starting')
  NeoBundle 'altercation/vim-colors-solarized'
  NeoBundle 'Shougo/unite.vim'
  NeoBundle 'git://git.code.sf.net/p/vim-latex/vim-latex'
+ NeoBundle 'fuenor/qfixhowm'
 
 
 " 次に説明するがInsertモードに入るまではneocompleteはロードされない
@@ -486,3 +486,20 @@ let g:tex_flavor='latex'
 let g:Imap_UsePlaceHolders = 1
 let g:Imap_DeleteEmptyPlaceHolders = 1
 let g:Imap_StickyPlaceHolders = 0
+
+"---------------------------------------------------------------------------
+" QFixHowm 2015-1-15
+
+"QFixHowmキーマップ
+let QFixHowm_Key = 'g'
+
+let QFixHowm_SplitMode = 1
+"howm_dirはファイルを保存したいディレクトリを設定。
+let howm_dir             = '~/Dropbox/memo'
+let howm_filename        = '%Y/%m/%Y-%m-%d-%H%M%S.howm'
+let howm_fileencoding    = 'utf-8'
+let howm_fileformat      = 'unix'
+
+let QFixHowm_DiaryFile = 'diary/%Y/%m/%Y-%m-%d-000000.howm'
+
+"---------------------------------------------------------------------------
