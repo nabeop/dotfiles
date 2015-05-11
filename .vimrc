@@ -6,7 +6,8 @@ augroup END
 "------------------------------------------------2014/05/23追記
 "------------------------------------------------undo機能のやつ
 "testing
-set noundofile
+autocmd VimEnter * :IndentGuidesEnable
+set undodir=~/vim/undo
 set imdisable
 "------------------------------------------------about searching
 set ignorecase          " 大文字小文字を区別しない
@@ -288,7 +289,7 @@ NeoBundle "nathanaelkane/vim-indent-guides"
 let s:hooks = neobundle#get_hooks("vim-indent-guides")
 function! s:hooks.on_source(bundle)
   let g:indent_guides_guide_size = 1
-  IndentGuidesEnable " 2013-06-24 10:00 追記
+"IndentGuidesEnable
 endfunction
 
 NeoBundleLazy "sjl/gundo.vim", {
@@ -320,7 +321,7 @@ NeoBundleLazy "davidhalter/jedi-vim", {
       \   "filetypes": ["python", "python3", "djangohtml"],
       \ },
       \ "build": {
-      \   "mac": "pip install jedi",
+      \   "mac": "pip3 install jedi",
       \   "unix": "pip install jedi",
       \ }}
 let s:hooks = neobundle#get_hooks("jedi-vim")
