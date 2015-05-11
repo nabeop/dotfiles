@@ -3,6 +3,9 @@ augroup MyAutoCmd
   autocmd!
 augroup END
 
+"------------------------------------------------2015/5/11追記
+"------------------------------------------------メニューバーがうるさいので
+source $VIMRUNTIME/delmenu.vim
 "------------------------------------------------2014/05/23追記
 "------------------------------------------------undo機能のやつ
 "testing
@@ -288,7 +291,7 @@ NeoBundle "nathanaelkane/vim-indent-guides"
 let s:hooks = neobundle#get_hooks("vim-indent-guides")
 function! s:hooks.on_source(bundle)
   let g:indent_guides_guide_size = 1
-  IndentGuidesEnable " 2013-06-24 10:00 追記
+  "IndentGuidesEnable " 2013-06-24 10:00 追記
 endfunction
 
 NeoBundleLazy "sjl/gundo.vim", {
@@ -315,27 +318,27 @@ NeoBundleLazy "jmcantrell/vim-virtualenv", {
       \ }}
 
 
-NeoBundleLazy "davidhalter/jedi-vim", {
-      \ "autoload": {
-      \   "filetypes": ["python", "python3", "djangohtml"],
-      \ },
-      \ "build": {
-      \   "mac": "pip install jedi",
-      \   "unix": "pip install jedi",
-      \ }}
-let s:hooks = neobundle#get_hooks("jedi-vim")
-function! s:hooks.on_source(bundle)
-  " jediにvimの設定を任せると'completeopt+=preview'するので
-  " 自動設定機能をOFFにし手動で設定を行う
-  let g:jedi#auto_vim_configuration = 0
-  " 補完の最初の項目が選択された状態だと使いにくいためオフにする
-  let g:jedi#popup_select_first = 0
-  " quickrunと被るため大文字に変更
-  let g:jedi#rename_command = '<Leader>R'
-  " gundoと被るため大文字に変更 (2013-06-24 10:00 追記）
-  let g:jedi#goto_assignments_command = '<Leader>G'
-endfunction
-
+"NeoBundleLazy "davidhalter/jedi-vim", {
+"      \ "autoload": {
+"      \   "filetypes": ["python", "python3", "djangohtml"],
+"      \ },
+"      \ "build": {
+"      \   "mac": "pip install jedi",
+"      \   "unix": "pip install jedi",
+"      \ }}
+"let s:hooks = neobundle#get_hooks("jedi-vim")
+"function! s:hooks.on_source(bundle)
+"  " jediにvimの設定を任せると'completeopt+=preview'するので
+"  " 自動設定機能をOFFにし手動で設定を行う
+"  let g:jedi#auto_vim_configuration = 0
+"  " 補完の最初の項目が選択された状態だと使いにくいためオフにする
+"  let g:jedi#popup_select_first = 0
+"  " quickrunと被るため大文字に変更
+"  let g:jedi#rename_command = '<Leader>R'
+"  " gundoと被るため大文字に変更 (2013-06-24 10:00 追記）
+"  let g:jedi#goto_assignments_command = '<Leader>G'
+"endfunction
+"
 NeoBundle "thinca/vim-template"
 " テンプレート中に含まれる特定文字列を置き換える
 autocmd MyAutoCmd User plugin-template-loaded call s:template_keywords()
@@ -486,6 +489,8 @@ let g:tex_flavor='latex'
 let g:Imap_UsePlaceHolders = 1
 let g:Imap_DeleteEmptyPlaceHolders = 1
 let g:Imap_StickyPlaceHolders = 0
+let g:Tex_Menus=0
+let g:Tex_PackagesMenu=0
 
 "---------------------------------------------------------------------------
 " QFixHowm 2015-1-15
