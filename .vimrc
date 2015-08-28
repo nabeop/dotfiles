@@ -251,6 +251,7 @@ endfunction
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'vim-scripts/Align'
 NeoBundle 'vim-scripts/YankRing.vim'
+NeoBundle 'vim-scripts/gtags.vim'
 
 " if has('lua') && v:version > 703 && has('patch825') 2013-07-03 14:30 > から >= に修正
 " if has('lua') && v:version >= 703 && has('patch825') 2013-07-08 10:00 必要バージョンが885にアップデートされていました

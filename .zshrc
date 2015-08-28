@@ -5,7 +5,7 @@
 ########################################
 # 環境変数
 export LANG=ja_JP.UTF-8
- 
+export JAVA_HOME='/usr/libexec/java_home -v 1.8' 
  
 # 色を使用出来るようにする
 autoload -Uz colors
@@ -154,7 +154,12 @@ fi
  
 #2014/1/7 つけたし．latexmk関係
 alias lmk='latexmk'
- 
+#2015/6/29 brew update
+alias brewupd='brew update && brew upgrade && brew cleanup'
+#2015/8/24 logbook
+alias openlog='java -XstartOnFirstThread -jar ~/Documents/logbook/logbook.jar'
+#2015/8/24 logbook_extend
+alias logbook='./Documents/logbook_extended/logbook.sh'
 ########################################
 # OS 別の設定
 case ${OSTYPE} in
@@ -162,7 +167,7 @@ case ${OSTYPE} in
         #Mac用の設定
         export CLICOLOR=1
         alias ls='ls -G -F'
-        ;;
+       ;;
     linux*)
         #Linux用の設定
         alias ls='ls -F --color=auto'
